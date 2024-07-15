@@ -8,8 +8,10 @@ module "eks-load-balancer-controller" {
   # these may work without this
   cluster_identity_oidc_issuer=module.eks.cluster_oidc_issuer_url # issuer is provider without the https://
 
-  cluster_identity_oidc_issuer_arn =  module.eks.oidc_provider_arn # if `enable_irsa = true`
+  cluster_identity_oidc_issuer_arn =  module.eks.oidc_provider_arn # if `enable_irsa = true` which is default provides this output which is needed and so is oidc
   cluster_name = module.eks.cluster_name
+  # depends on whole of eks
+  depends_on = [module.eks]
 }
 
 
