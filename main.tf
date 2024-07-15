@@ -53,6 +53,8 @@ module "eks" {
   version = "20.8.5"
 
   cluster_name    = local.cluster_name
+  enable_irsa     = true # default 
+
   cluster_version = "1.29"
 
   cluster_endpoint_public_access           = true
@@ -76,22 +78,22 @@ module "eks" {
     one = {
       name = "node-group-1"
 
-      instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
-    }
-
-    two = {
-      name = "node-group-2"
-
-      instance_types = ["t3.small"]
+      instance_types = ["t3.medium"]
 
       min_size     = 1
       max_size     = 2
       desired_size = 1
     }
+
+#    two = {
+#      name = "node-group-2"
+#
+#      instance_types = ["t3.small"]
+#
+#      min_size     = 1
+#      max_size     = 2
+#      desired_size = 1
+#    }
   }
 }
 
