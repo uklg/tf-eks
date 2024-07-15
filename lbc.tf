@@ -17,4 +17,13 @@ module "eks-load-balancer-controller" {
 # export KUBE_CONFIG_PATH=~/.kube/config
 # terraform apply
 
+# kubectl get deployments.apps  -A
+# NAMESPACE           NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+# aws-lb-controller   aws-load-balancer-controller   2/2     2            2           3m13s
 
+
+# kubectl get events -A
+# aws-lb-controller   4m33s       Normal    ScalingReplicaSet        deployment/aws-load-balancer-controller              Scaled up replica set aws-load-balancer-controller-8548dd7477 to 2
+
+
+# this controller  mutates the requestes to load balancer to point to the single alb 
