@@ -17,6 +17,4 @@ module "eks-load-balancer-controller" {
 # export KUBE_CONFIG_PATH=~/.kube/config
 # terraform apply
 
-export KUBE_CONFIG_PATH=~/.kube/config
-terraform apply
 
