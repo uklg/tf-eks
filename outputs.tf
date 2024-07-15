@@ -20,3 +20,12 @@ output "cluster_name" {
   description = "Kubernetes Cluster Name"
   value       = module.eks.cluster_name
 }
+
+
+output "cluster_identity_oidc_issuer" {
+  value   = module.eks.cluster_oidc_issuer_url # issuer is provider without the https://
+}
+
+output "cluster_identity_oidc_issuer_arn" {
+  value =  module.eks.oidc_provider_arn 
+}
