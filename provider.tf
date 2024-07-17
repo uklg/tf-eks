@@ -21,3 +21,6 @@ module "eks-kubeconfig" {
   cluster_name = module.eks.cluster_name
   depends_on = [module.eks]
 
+# https://developer.hashicorp.com/terraform/tutorials/kubernetes/kubernetes-provider?variants=kubernetes%3Aeks
+
+
