@@ -121,8 +121,8 @@ resource "null_resource" "udpdate_ec2" {
   # Using triggers to force execution on every apply
 
   triggers = {
-
-    always_run = timestamp()
+    # always run this instead of just once
+    #always_run = timestamp()
 
   }
 

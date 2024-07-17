@@ -11,8 +11,13 @@ module "eks-load-balancer-controller" {
   cluster_identity_oidc_issuer_arn =  module.eks.oidc_provider_arn # if `enable_irsa = true` which is default provides this output which is needed and so is oidc
   cluster_name = module.eks.cluster_name
   # depends on whole of eks
-  depends_on = [module.eks]
+  # depends_on = [module.eks]
+  # depends_on = [module.null_resource.udpdate_ec2]
+  depends_on = [null_resource.udpdate_ec2]
+
+
 }
+
 
 
 # this was needed to stop error: https://stackoverflow.com/questions/66427129/terraform-error-kubernetes-cluster-unreachable-invalid-configuration
