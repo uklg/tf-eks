@@ -95,6 +95,8 @@ module "eks" {
 #      desired_size = 1
 #    }
   }
+
+
 }
 
 
@@ -113,3 +115,25 @@ module "irsa-ebs-csi" {
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
 }
+
+resource "null_resource" "udpdate_ec2" {
+
+  # Using triggers to force execution on every apply
+
+  triggers = {
+
+    always_run = timestamp()
+
+  }
+
+  provisioner "local-exec" {
+
+    command = "aws eks --region ${var.region} update-kubeconfig --name ${module.eks.cluster_name}"
+    
+    #command = module.eks.cluster_name
+
+  }
+#  depends_on = [module.null_resource.udpdate_ec2]
+  depends_on = [module.eks]
+}
+
