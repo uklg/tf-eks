@@ -1,0 +1,47 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+
+    privateKeySecretRef:
+       name: example-issuer-account-key
+
+    solvers:
+
+    # example: cross-account zone management for example.com
+    # this solver uses ambient credentials (i.e. inferred from the environment or EC2 Metadata Service)
+    # to assume a role in a different account
+    - selector:
+        dnsZones:
+          - "o14.xyz"
+      dns01:
+        route53:
+          region: eu-north-1
+          hostedZoneID: Z022920311898UUXNTU4F # optional, see policy above
+          role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
+
+    # this solver handles example.org challenges
+    # and uses explicit credentials
+    - selector:
+        dnsZones:
+          - "o14.xyz"
+      dns01:
+        route53:
+          region: eu-north-1
+          # The AWS access key ID can be specified using the literal accessKeyID parameter
+          # or retrieved from a secret using the accessKeyIDSecretRef
+          # If using accessKeyID, omit the accessKeyIDSecretRef parameter and vice-versa
+#          accessKeyID: Z022920311898UUXNTU4F
+#          accessKeyIDSecretRef:
+#            name: prod-route53-credentials-secret
+#            key: access-key-id
+#          secretAccessKeySecretRef:
+#            name: prod-route53-credentials-secret
+#            key: secret-access-key
+          # you can also assume a role with these credentials
+          #role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
+          role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
+
