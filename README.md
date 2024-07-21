@@ -14,7 +14,17 @@ Cluster is installed and is accessbile before LBC is instalede with normal load 
 
 LBC
 
-Cluster has to be able to  talk to OIDC (that i turned on by default)  to via a role attached to cluster this lbc does this for us.
+Cluster has to be able to  talk to OIDC (that i turned on by default when eks cluster is configured here in eks module)  to via a role attached to cluster this lbc does this for us.
 
 It mutates requests to crteate ingress and services so they go go one ALB if desired and services can share ALBS. Annototions allow public or private conttrollers.
 
+
+Cluster is installed then it depended on by  null exec to update the aws kubectl profile and then  the lbc depends on being able to speak to the cluster and permissions:
+
+add permissions to create and acesss Route 53
+
+Attach the policy to the eks user:
+
+AmazonRoute53FullAccess
+
+If this layered perms chaind does not work need to have lbc in a different folder and install that after but refer to outputs from the first folder and do the cluster first then the aws kubectl update and then the lbc istall. that would be more reliable possibly
