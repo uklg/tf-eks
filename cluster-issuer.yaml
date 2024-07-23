@@ -25,13 +25,13 @@ spec:
 
     # this solver handles example.org challenges
     # and uses explicit credentials
-    - selector:
-        dnsZones:
-          - "o14.xyz"
-      dns01:
-        route53:
-          region: eu-north-1
-          # The AWS access key ID can be specified using the literal accessKeyID parameter
+#    - selector:
+#        dnsZones:
+#          - "o14.xyz"
+#      dns01:
+ #       route53:
+#          region: eu-north-1
+#          # The AWS access key ID can be specified using the literal accessKeyID parameter
           # or retrieved from a secret using the accessKeyIDSecretRef
           # If using accessKeyID, omit the accessKeyIDSecretRef parameter and vice-versa
 #          accessKeyID: Z022920311898UUXNTU4F
@@ -43,5 +43,5 @@ spec:
 #            key: secret-access-key
           # you can also assume a role with these credentials
           #role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
-          role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
+ #         role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
 
