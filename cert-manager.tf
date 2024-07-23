@@ -2,6 +2,8 @@
 # https://cert-manager.io/docs/configuration/acme/dns01/route53/
 
 
+# need to install the module and then refer to it to create a dns-role and profile and trust relationship and attach them. A user is creating the R53 records and another user is modifying them dns-manager
+
 resource "aws_iam_policy" "policy2" {
   name        = "dns-manager"
   path        = "/"
