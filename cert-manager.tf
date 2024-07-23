@@ -42,6 +42,14 @@ resource "aws_iam_role" "dns-manager" {
   })
 }
 
+# lots of docs here for this
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment
+# The name of the IAM role to which the policy should be applied
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = "dns-manager"
+  policy_arn = "arn:aws:iam::905418418476:policy/dns-manager"
+}
 
 
 # will skip cross account access for now
