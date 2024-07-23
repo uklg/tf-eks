@@ -21,7 +21,8 @@ spec:
         route53:
           region: eu-north-1
           hostedZoneID: Z022920311898UUXNTU4F # optional, see policy above
-          role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
+          #role: arn:aws:iam::905418418476:role/cert-manager-irsa-cert-manager
+          role: arn:aws:iam::905418418476:role/dns-manager
 
     # this solver handles example.org challenges
     # and uses explicit credentials
