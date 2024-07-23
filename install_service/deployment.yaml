@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx1
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx1
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx1
     spec:
       
       containers:
-      - name: nginx
-        image: nginx
+      - name: nginx1
+        image: nginx1
         resources:
           limits:
             memory: "128Mi"
@@ -29,7 +29,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx-service
+  name: nginx-service1
 spec:
   selector:
     app: nginx
@@ -48,8 +48,8 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    #lb.ingress.kubernetes.io/healthcheck-path: /actuator/health/liveness
-    alb.ingress.kubernetes.io/group.name: retail-app-group
+    #alb.ingress.kubernetes.io/healthcheck-path: /actuator/health/liveness
+    alb.ingress.kubernetes.io/group.name: retail-app-group1
 
 spec:
   ingressClassName: alb
@@ -65,7 +65,7 @@ spec:
             path: /
             backend:
               service:
-                name: nginx-service
+                name: nginx-service1
                 port:
-                  number: 8080
+                  number: 80
 
