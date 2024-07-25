@@ -4,7 +4,7 @@
 
 # need to install the module and then refer to it to create a dns-role and profile and trust relationship and attach them. A user is creating the R53 records and another user is modifying them dns-manager
 
-resource "aws_iam_policy" "policy2" {
+resource "aws_iam_policy" "dns-manager" {
   name        = "dns-manager"
   path        = "/"
   description = "Terraform policy to allow cert-manager to create issuers"
@@ -14,6 +14,8 @@ resource "aws_iam_policy" "policy2" {
 #  policy = file("cert-manager-dns-role.json")
 #policy = jsonencode(file("cert-manager-dns-role.yaml"))
  policy = jsonencode(local.config)
+ depends_on = [module.eks-cert-manager]
+
 }
 
 
@@ -42,7 +44,8 @@ resource "aws_iam_role" "dns-manager" {
       },
     ]
   })
-  depends_on = [module.eks-cert-manager]
+  #depends_on = [module.eks-cert-manager]
+  depends_on = [aws_iam_policy.dns-manager]
 
 }
 
