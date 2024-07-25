@@ -42,6 +42,8 @@ resource "aws_iam_role" "dns-manager" {
       },
     ]
   })
+  depends_on = [module.eks-cert-manager]
+
 }
 
 # lots of docs here for this
@@ -51,6 +53,8 @@ resource "aws_iam_role" "dns-manager" {
 resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = "dns-manager"
   policy_arn = "arn:aws:iam::905418418476:policy/dns-manager"
+  depends_on = [aws_iam_role.dns-manager]
+
 }
 
 
