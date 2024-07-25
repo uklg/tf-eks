@@ -28,4 +28,4 @@ terraform.rc
 
 *.sw?
 
-.terraform.lock.hcl
+terraform.lock.hcl
