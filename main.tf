@@ -78,7 +78,11 @@ module "eks" {
     one = {
       name = "node-group-1"
 
+      # this is most cost effective family. bring down to medium if can
+      # arm and needs work
+      #instance_types = ["t4g.large"]
       instance_types = ["t3.medium"]
+
 
       min_size     = 1
       max_size     = 2
