@@ -32,3 +32,5 @@ If this layered perms chaind does not work need to have lbc in a different folde
 Cert-man is being disabled as only ACM and LBC needed to bring up an ALB TLS service in AWS perfectly
 
 
+
+Spot instances set up but need extra work for reliability and extra instances to move load too 
