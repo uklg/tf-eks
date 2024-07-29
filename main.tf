@@ -75,6 +75,7 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
+    /*
     one = {
       name = "node-group-1"
 
@@ -87,7 +88,8 @@ module "eks" {
       min_size     = 1
       max_size     = 2
       desired_size = 1
-    }
+
+     */
 
 #    two = {
 #      name = "node-group-2"
@@ -118,9 +120,9 @@ module "eks" {
       subnet_ids = [module.vpc.private_subnets[0]] # only one subnet to simplify PV usage
       # availability_zones = ["${var.region}a"] # conflict with previous option. TODO try subnet_ids=null at creation (because at modification it fails)
 
-      desired_size         = 2
+      desired_size         = 1
       min_size             = 1
-      max_size             = 10
+      max_size             = 2
       bootstrap_extra_args = "--kubelet-extra-args '--node-labels=node.kubernetes.io/lifecycle=spot'"
 
       use_mixed_instances_policy = true
