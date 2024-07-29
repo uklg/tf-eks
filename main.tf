@@ -99,6 +99,49 @@ module "eks" {
 #      desired_size = 1
 #    }
   }
+    self_managed_node_groups = {
+
+    default_node_group = {
+      create = false
+    }
+
+    # fulltime-az-a = {
+    #   name                 = "fulltime-az-a"
+    #   subnets              = [module.vpc.private_subnets[0]]
+    #   instance_type        = "t3.medium"
+    #   desired_size         = 1
+    #   bootstrap_extra_args = "--kubelet-extra-args '--node-labels=node.kubernetes.io/lifecycle=normal'"
+    # }
+
+    spot-az-a = {
+      name       = "spot-az-a"
+      subnet_ids = [module.vpc.private_subnets[0]] # only one subnet to simplify PV usage
+      # availability_zones = ["${var.region}a"] # conflict with previous option. TODO try subnet_ids=null at creation (because at modification it fails)
+
+      desired_size         = 2
+      min_size             = 1
+      max_size             = 10
+      bootstrap_extra_args = "--kubelet-extra-args '--node-labels=node.kubernetes.io/lifecycle=spot'"
+
+      use_mixed_instances_policy = true
+      mixed_instances_policy = {
+        instances_distribution = {
+          on_demand_base_capacity                  = 0
+          on_demand_percentage_above_base_capacity = 0
+          spot_allocation_strategy                 = "lowest-price" # "capacity-optimized" described here: https://aws.amazon.com/blogs/compute/introducing-the-capacity-optimized-allocation-strategy-for-amazon-ec2-spot-instances/
+        }
+
+        override = [
+          {
+            instance_type     = "t3.medium"
+            weighted_capacity = "1"
+          },
+        ]
+      }
+
+    }
+
+  }
 
 
 }
