@@ -28,3 +28,7 @@ Attach the policy to the eks user:
 AmazonRoute53FullAccess
 
 If this layered perms chaind does not work need to have lbc in a different folder and install that after but refer to outputs from the first folder and do the cluster first then the aws kubectl update and then the lbc istall. that would be more reliable possibly
+
+Cert-man is being disabled as only ACM and LBC needed to bring up an ALB TLS service in AWS perfectly
+
+
