@@ -76,6 +76,7 @@ module "eks" {
 
   eks_managed_node_groups = {
     /*
+    These instances will be available like the other groups including spot groups if set can have more than one
     one = {
       name = "node-group-1"
 
