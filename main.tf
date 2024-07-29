@@ -117,6 +117,7 @@ module "eks" {
 
     spot-az-a = {
       name       = "spot-az-a"
+      # this is cost effective but can be pulled from cluster quickly if demanded
       subnet_ids = [module.vpc.private_subnets[0]] # only one subnet to simplify PV usage
       # availability_zones = ["${var.region}a"] # conflict with previous option. TODO try subnet_ids=null at creation (because at modification it fails)
 
