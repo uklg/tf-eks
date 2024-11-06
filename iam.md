@@ -1,3 +1,5 @@
+# used for spinning up eks cluster with correct permissions
+
 users
   eks
     policy name:
