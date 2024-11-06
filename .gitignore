@@ -20,7 +20,7 @@ crash.log
 override.tf
 override.tf.json
 *_override.tf
-*_override.tf.json
+#*_override.tf.json
 
 # Ignore CLI configuration files
 .terraformrc
