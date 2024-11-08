@@ -34,3 +34,7 @@ Cert-man is being disabled as only ACM and LBC needed to bring up an ALB TLS ser
 
 
 Spot instances set up but need extra work for reliability and extra instances to move load too 
+
+
+ebs driver installed to allow persistance storage enabled 
+https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
