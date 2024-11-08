@@ -75,8 +75,8 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    
-    # These instances will be available like the other groups including spot groups if set can have more than one
+    /*
+    These instances will be available like the other groups including spot groups if set can have more than one
     one = {
       name = "node-group-1"
 
@@ -90,7 +90,7 @@ module "eks" {
       max_size     = 2
       desired_size = 1
 
-      
+     */
 
 #    two = {
 #      name = "node-group-2"
@@ -101,8 +101,6 @@ module "eks" {
 #      max_size     = 2
 #      desired_size = 1
 #    }
-    count=0
-    }
   }
     self_managed_node_groups = {
 
