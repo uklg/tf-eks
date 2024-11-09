@@ -1,5 +1,9 @@
 This installs EKS and working LBC
 
+prerequisites
+cd to iam and set this up first or call a module
+this will setup the iam required to setup and run the eks cluster
+
 
 
 # Learn Terraform - Provision an EKS Cluster
