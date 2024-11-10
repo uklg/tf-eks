@@ -21,3 +21,25 @@ attach policy directly to eks user
 
 This is a prereq for the eks cluster spin up and operation
 add these before running the eks cluster provision either module or in dir
+
+
+in the .aws is two files
+
+
+~/.aws/credentials
+
+[eks]
+aws_access_key_id = ____PFMF
+aws_secret_access_key = xxxx
+
+
+need to create this user  in aws console 
+permissions IAMFullAccess
+
+
+[iam]
+aws_access_key_id = ____Q77A
+aws_secret_access_key = xxxx
+
+
+
