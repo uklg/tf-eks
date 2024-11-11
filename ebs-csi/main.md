@@ -77,3 +77,6 @@ kubectl get pvc
 
  The PVC is still in pending status because the gp3 StorageClass uses a volumeBindingMode of WaitForFirstConsumer. This attribute makes sure that the PersistentVolume (PV) and Pod will be provisioned in the same AWS availability zone (AZ)
 
+
+todo: check how a failover would effect ebs-csi
+
