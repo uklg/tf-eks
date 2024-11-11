@@ -9,6 +9,7 @@ cd ../
 export cluster_name=$(terraform output cluster_name| tr -d '"')
 
 
+cd -
 
 
 echo check to see if ebi-csi driver is installed in the eks cluster. check for ACTIVE status
@@ -41,4 +42,31 @@ echo Every Amazon EKS cluster currently comes with an in-tree plugin–based Sto
 kubectl get sc
 
 
+# NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+# gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false       
+
 echo 'To use the external EBS CSI driver, we need to create a new StorageClass based upon it:'
+
+
+echo apply the storage class
+
+
+kubectl apply -f gp3-sc.yaml
+
+
+
+echo see the specific class
+kubectl get sc gp3
+
+echo see all the classes 
+
+kubectl get sc
+
+#NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+# gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  167m
+# gp3             ebs.csi.aws.com         Delete          WaitForFirstConsumer   true                   2m24s
+
+
+
+echo We can see the provisioner is ebs.csi.aws.com
+
