@@ -1,5 +1,9 @@
 setup ebs csi persisent volume storage
 
+
+Keep in mind that the underlying EBS volume of a PV is bound to an AZ. If you want to stop and restart the pod later on, make sure to add nodeSelector or nodeAffinity to the YAML specification to run the pod on a node that is part of the same AZ as the EBS volume.
+
+
 https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
 
 code that would be needed but not needed here
