@@ -109,15 +109,6 @@ kubectl get pvc
 echo should be able to see bound here
 
 
-
-
-
-exit 0 #-----------------------
-
-
-
-
-
 deletiing
 
 
@@ -170,7 +161,7 @@ Your PersistenVolumes will not be terminated while there is a pod, deployment or
 change reclaim policy form delete
 
 
-kubectl get sc
+ubectl get sc
 NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  6h19m
 gp3             ebs.csi.aws.com         Delete          WaitForFirstConsumer   true                   3h34m
