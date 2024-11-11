@@ -73,3 +73,5 @@ echo We can see the provisioner is ebs.csi.aws.com
 
 
 echo 'Note: Because the GA version supports the volume resizing feature, we set the allowVolumeExpansion property to true'
+
+echo  'No migration of in-tree to external CSI provisioner occurs when using the Amazon EKS managed add-on Amazon EBS CSI.'
