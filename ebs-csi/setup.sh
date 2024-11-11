@@ -34,3 +34,10 @@ echo By default, every node is capable of using CSI-based Amazon EBS volumes
 
 kubectl get csinodes
 
+
+echo
+echo Every Amazon EKS cluster currently comes with an in-tree plugin–based StorageClass - sc
+
+kubectl get sc
+
+
