@@ -36,7 +36,8 @@ module "irsa-ebs-csi" {
 
 To use the external EBS CSI driver, we need to create a new StorageClass based upon it:
 
-$ cat gp3-sc.yaml
+cat gp3-sc.yaml
+```
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -46,4 +47,26 @@ provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: gp3
+```
 
+apply this
+
+Now we create a PersistentVolumeClaim (PVC), which will be used by a pod to show the dynamic provisioning capability of a gp3-based StorageClass:
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-csi
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: gp3
+  resources:
+    requests:
+      storage: 1Gi
+
+```
+
+
+apply this
