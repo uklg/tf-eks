@@ -27,4 +27,3 @@ echo deleting everything
 kubectl delete -f .
 
 
-:

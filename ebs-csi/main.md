@@ -1,6 +1,7 @@
 setup ebs csi persisent volume storage
 
 
+
 Keep in mind that the underlying EBS volume of a PV is bound to an AZ. If you want to stop and restart the pod later on, make sure to add nodeSelector or nodeAffinity to the YAML specification to run the pod on a node that is part of the same AZ as the EBS volume.
 
 
@@ -126,6 +127,31 @@ check and see the pvc is  mounted
 kubectl get pvc
 NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 pvc-csi   Bound    pvc-1aa33ed7-9f42-45bf-901e-d7a950dec161   1Gi        RWO            gp3            <unset>                 26m
+
+
+
+
+pvc-2ce0cc8b-7c68-4204-b7da-f4a23e9ce8fb   1Gi        RWO            Retain           Released   default/pvc-csi-retain   gp3-retain     <unset>                          10m
+
+if  reclaim policy is  retain then the pv will be kept with contents and will be reattached  after pod is recreated 
+
+kubectl apply -f *retain*
+
+
+kubectl delete -f *retain*
+
+
+this pv will not be delted unless
+
+
+
+kubectl get pv
+
+kubectl delete pv pvc-2ce0cc8b-7c68-4204-b7da-f4a23e9ce8fb
+
+
+
+or can manually delete in console
 
 
 
