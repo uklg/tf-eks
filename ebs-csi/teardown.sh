@@ -24,7 +24,7 @@ export AWS_PROFILE=eks
 
 echo deleting everything
 
- kubectl delete .
+kubectl delete -f .
 
 
 :
