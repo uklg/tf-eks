@@ -80,3 +80,17 @@ echo  'No migration of in-tree to external CSI provisioner occurs when using the
 echo 'Now we create a PersistentVolumeClaim (PVC), which will be used by a pod to show the dynamic provisioning capability of a gp3-based StorageClass'
 
 kubectl apply -f pvc-csi.yaml
+
+kubectl get pvc
+
+
+# NAME      STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+# pvc-csi   Pending
+
+
+
+echo The PVC is still in pending status because the gp3 StorageClass uses a volumeBindingMode of WaitForFirstConsumer. This attribute makes sure that the PersistentVolume (PV) and Pod will be provisioned in the same AWS availability zone (AZ)
+
+
+
+
