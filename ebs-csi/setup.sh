@@ -41,3 +41,4 @@ echo Every Amazon EKS cluster currently comes with an in-tree plugin–based Sto
 kubectl get sc
 
 
+echo 'To use the external EBS CSI driver, we need to create a new StorageClass based upon it:'

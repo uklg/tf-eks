@@ -27,3 +27,19 @@ module "irsa-ebs-csi" {
 ```
 
 
+
+
+
+To use the external EBS CSI driver, we need to create a new StorageClass based upon it:
+
+$ cat gp3-sc.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: gp3
+allowVolumeExpansion: true
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+
