@@ -80,3 +80,53 @@ kubectl get pvc
 
 todo: check how a failover would effect ebs-csi
 
+
+
+
+create a pod that mounts the volume
+
+
+
+cat pod-csi.yaml
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-gp3
+spec:
+  containers:
+  - name: app
+    image: centos
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo $(date -u) >> /data/out.txt; sleep 5; done"]
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: pvc-csi
+```
+
+
+apply this
+
+wait a few seconds
+
+see it is running
+
+kubectl get pod
+
+
+check and see the pvc is  mounted
+
+
+
+kubectl get pvc
+NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+pvc-csi   Bound    pvc-1aa33ed7-9f42-45bf-901e-d7a950dec161   1Gi        RWO            gp3            <unset>                 26m
+
+
+
+

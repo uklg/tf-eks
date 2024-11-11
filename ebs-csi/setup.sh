@@ -89,8 +89,23 @@ kubectl get pvc
 
 
 
-echo The PVC is still in pending status because the gp3 StorageClass uses a volumeBindingMode of WaitForFirstConsumer. This attribute makes sure that the PersistentVolume (PV) and Pod will be provisioned in the same AWS availability zone (AZ)
+echo 'The PVC is still in pending status because the gp3 StorageClass uses a volumeBindingMode of WaitForFirstConsumer. This attribute makes sure that the PersistentVolume (PV) and Pod will be provisioned in the same AWS availability zone (AZ)'
 
 
+
+
+echo create the pod with a pv def
+kubectl apply -f pod-csi.yaml
+
+
+echo waiting for pod to spin up
+sleep 2
+echo  
+kubectl get pod
+
+
+kubectl get pvc
+
+echo should be able to see bound here
 
 
