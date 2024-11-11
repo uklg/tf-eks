@@ -167,3 +167,4 @@ minecraft would need a retain pv for example or any other similar app
 
 
 the other cs definitino  where it is reclaimed if pvc is deleted  so is the pv removed too automatically
+useful but be careful about two types
