@@ -1,3 +1,8 @@
+need to use iam user here with full iam permissiongs in that users profile
+
+this user does not have enough permissions to create the eksc cluster the eks user and aws profile is used for that
+
+
 # used for spinning up eks cluster with correct permissions
 
 users
