@@ -151,6 +151,7 @@ kubectl get pv
 
 kubectl delete pv pvc-2ce0cc8b-7c68-4204-b7da-f4a23e9ce8fb
 
+this does not actually seem to remove it
 
 
 or can manually delete in console
