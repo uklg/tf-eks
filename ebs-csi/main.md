@@ -141,7 +141,9 @@ kubectl apply -f *retain*
 kubectl delete -f *retain*
 
 
-this pv will not be delted unless
+
+
+this pv will not be deleted (kept forever) unless
 
 
 
@@ -162,3 +164,5 @@ minecraft would need a retain pv for example or any other similar app
 
 
 
+
+the other cs definitino  where it is reclaimed if pvc is deleted  so is the pv removed too automatically
