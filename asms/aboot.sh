@@ -35,3 +35,4 @@ aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-st
 
 
 
+# added eks policy SecretsManagerReadWrite temp
