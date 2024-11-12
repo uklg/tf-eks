@@ -69,6 +69,23 @@ arn2=$(aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`
 aws --region "$REGION" iam delete-policy --policy-arn $arn2
 
 
+echo An error occurred (DeleteConflict) when calling the DeletePolicy operation: Cannot delete a policy attached to entities.
+
+
+
+#aws --region "$REGION" iam  list-entities-for-policy --policy-arn $arn2 
+#{
+#    "PolicyGroups": [],
+#    "PolicyUsers": [],
+#    "PolicyRoles": [
+#        {
+#            "RoleName": "eksctl-education-eks-i6RbpLtk-addon-iamservic-Role1-U0gtvp5kV0nP",
+#            "RoleId": "AROA5FTZEVEWMQ5LBLN75"
+#        }
+#    ]
+#}
+
+
 
 
 #aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`
