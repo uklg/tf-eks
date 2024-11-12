@@ -77,19 +77,14 @@ kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver
 kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
 
 
-exit
-echo shouul be in pod user /mnt/secretes-store
 
-
-
-echo any errors try deleting the ngix policy first
 
 
 
 kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/MySecret; echo
 
 
-echo '{"username":"memeuser", "password":"hunter2"}'
+echo should be no '{"username":"memeuser", "password":"hunter2"}'
 
 
 
