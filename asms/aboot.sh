@@ -79,3 +79,10 @@ echo shouul be in pod user /mnt/secretes-store
 echo any errors try deleting the ngix policy first
 
 
+
+kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/MySecret; echo
+
+
+echo '{"username":"memeuser", "password":"hunter2"}'
+
+
