@@ -6,7 +6,20 @@ export AWS_PROFILE=eks
 export REGION=eu-north-1
 
 
-helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+echo list all helm deployments in all namespaces
+
+helm list -A 
+
+
+
+helm uninstall -n kube-system csi-secrets-store
+
+
+helm repo uninstall secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+
+exit
+
+
 
 helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver
 
@@ -20,6 +33,7 @@ cd -
 
 aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
 
+exit
 
 #An error occurred (AccessDeniedException) when calling the CreateSecret operation: User: arn:aws:iam::905418418476:user/eks is not authorized to perform: secretsmanager:CreateSecret on resource: MySecret because no identity-based policy allows the secretsmanager:CreateSecret action
 
