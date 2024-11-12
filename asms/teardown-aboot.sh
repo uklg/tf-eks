@@ -35,7 +35,7 @@ aws --region "$REGION" secretsmanager  delete-secret  --secret-id $arn
 
 #aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
 
-exit
+
 
 #An error occurred (AccessDeniedException) when calling the CreateSecret operation: User: arn:aws:iam::905418418476:user/eks is not authorized to perform: secretsmanager:CreateSecret on resource: MySecret because no identity-based policy allows the secretsmanager:CreateSecret action
 
@@ -64,9 +64,13 @@ POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-
 #eksctl utils associate-iam-oidc-provider --region="$REGION" --cluster="$CLUSTERNAME" --approve # Only run this once
 
 
-eksctl create iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" --attach-policy-arn "$POLICY_ARN" --approve --override-existing-serviceaccounts
+eksctl delete iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" 
 
 
+#eksctl create iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" --attach-policy-arn "$POLICY_ARN" --approve --override-existing-serviceaccount
+
+
+exit
 
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleSecretProviderClass.yaml
 
