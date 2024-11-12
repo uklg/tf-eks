@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+export AWS_PROFILE=eks
+
+export REGION=eu-north-1
+export CLUSTERNAME=education-eks-dkETw1NA
+-- INSERT --                                  
+
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 
@@ -25,7 +32,6 @@ export CLUSTERNAME=education-eks-dkETw1NA
 
 
 
-export AWS_PROFILE=eks
 
 
 aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
@@ -67,5 +73,9 @@ kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
 
 echo shouul be in pod user /mnt/secretes-store
+
+
+
+echo any errors try deleting the ngix policy first
 
 
