@@ -5,10 +5,6 @@ export AWS_PROFILE=eks
 
 export REGION=eu-north-1
 export CLUSTERNAME=education-eks-dkETw1NA
--- INSERT --                                  
-
-kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
-
 
 
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
@@ -22,13 +18,13 @@ export CLUSTERNAME=education-eks-dkETw1NA
 
 
 
-#cd ../
+cd ../
 
 
-#export cluster_name=$(terraform output cluster_name| tr -d '"')
+export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
 
 
-#cd -
+cd -
 
 
 
