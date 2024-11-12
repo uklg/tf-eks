@@ -17,19 +17,16 @@ helm uninstall -n kube-system csi-secrets-store
 
 helm repo remove secrets-store-csi-driver 
 
-exit
 
 
-
-helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver
-
-kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
+kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 
 cd ../
 export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
 cd -
 
+exit
 
 aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
 
