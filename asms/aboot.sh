@@ -14,20 +14,10 @@ helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-s
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 export REGION=eu-north-1
-export CLUSTERNAME=education-eks-dkETw1NA
-
-
 
 cd ../
-
-
 export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
-
-
 cd -
-
-
-
 
 
 aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
@@ -80,5 +70,7 @@ kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head 
 
 
 echo '{"username":"memeuser", "password":"hunter2"}'
+
+
 
 
