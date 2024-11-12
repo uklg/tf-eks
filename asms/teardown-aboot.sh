@@ -98,6 +98,11 @@ echo An error occurred (DeleteConflict) when calling the DeletePolicy operation:
 
 #aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`
 
+attached_role_name=$(aws --region "$REGION" iam  list-entities-for-policy --policy-arn $arn2 |grep RoleName|cut -d '"' -f 4)
+
+
+aws --region "$REGION" iam detach-role-policy --role-name $attached_role_name --policy-arn $arn2
+
 
 
 
