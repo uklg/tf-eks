@@ -82,3 +82,14 @@ very informative
 https://github.com/aws/secrets-store-csi-driver-provider-aws
 
 
+
+
+---
+
+rotating secrets
+
+after deploy secret change may need redeployment after secret change to pick it up. can redeploy same code potentially. or it might to itself check after one hour
+
+keep old password and new password in database for a bit
+
+
