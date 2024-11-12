@@ -5,6 +5,7 @@ export AWS_PROFILE=eks
 
 export REGION=eu-north-1
 
+secretname=Blahsecret2
 
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 
@@ -19,7 +20,7 @@ export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
 cd -
 
 
-aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
+aws --region "$REGION" secretsmanager  create-secret --name $secretname --secret-string '{"username":"memeuser", "password":"hunter2"}'
 
 
 #An error occurred (AccessDeniedException) when calling the CreateSecret operation: User: arn:aws:iam::905418418476:user/eks is not authorized to perform: secretsmanager:CreateSecret on resource: MySecret because no identity-based policy allows the secretsmanager:CreateSecret action
@@ -65,7 +66,7 @@ echo any errors try deleting the ngix policy first
 
 
 
-kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/MySecret; echo
+kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/$secret; echo
 
 
 echo '{"username":"memeuser", "password":"hunter2"}'
