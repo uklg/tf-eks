@@ -73,6 +73,8 @@ echo An error occurred (DeleteConflict) when calling the DeletePolicy operation:
 
 
 
+
+
 #aws --region "$REGION" iam  list-entities-for-policy --policy-arn $arn2 
 #{
 #    "PolicyGroups": [],
@@ -85,6 +87,12 @@ echo An error occurred (DeleteConflict) when calling the DeletePolicy operation:
 #    ]
 #}
 
+#
+#  detach-role-policy
+# --role-name <value>
+# --policy-arn <value>
+
+# detach policy from role
 
 
 
