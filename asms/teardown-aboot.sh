@@ -59,17 +59,14 @@ echo 'Create an access policy for the pod scoped down to just the secrets it sho
 #eksctl utils associate-iam-oidc-provider --region="$REGION" --cluster="$CLUSTERNAME" --approve # Only run this once
 
 
-eksctl delete iamserviceaccount --name nginx-deployment-policy --region="$REGION" --cluster "$CLUSTERNAME" 
-#nginx-deployment-sa
+eksctl delete iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" 
 
 
 
-arn2=$(aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`]'|grep Arn|cut -d '"' -f4)
-
-aws --region "$REGION" iam delete-policy --policy-arn $arn2
 
 
-echo An error occurred (DeleteConflict) when calling the DeletePolicy operation: Cannot delete a policy attached to entities.
+
+echo 'An error occurred (DeleteConflict) when calling the DeletePolicy operation: Cannot delete a policy attached to entities.'
 
 
 
@@ -107,6 +104,15 @@ aws --region "$REGION" iam detach-role-policy --role-name $attached_role_name --
 
 
 
+
+arn2=$(aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`]'|grep Arn|cut -d '"' -f4)
+
+aws --region "$REGION" iam delete-policy --policy-arn $arn2
+
+
+
+
+
 #eksctl create iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" --attach-policy-arn "$POLICY_ARN" --approve --override-existing-serviceaccount
 
 
@@ -116,12 +122,12 @@ kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver
 
 kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
 
+echo blah
 
 
 
 
-
-kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/MySecret; echo
+#kubectl exec -it $(kubectl get pods | awk '/nginx-deployment/{print $1}' | head -1) cat /mnt/secrets-store/MySecret; echo
 
 
 echo should be no '{"username":"memeuser", "password":"hunter2"}'
