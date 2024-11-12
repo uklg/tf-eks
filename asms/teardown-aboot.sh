@@ -5,6 +5,11 @@ export AWS_PROFILE=eks
 
 export REGION=eu-north-1
 
+cd ../
+export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
+cd -
+
+
 
 echo list all helm deployments in all namespaces
 
@@ -22,15 +27,13 @@ helm repo remove secrets-store-csi-driver
 kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 
-cd ../
-export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
-cd -
 
 arn=$(aws --region "$REGION" secretsmanager list-secrets|grep ARN|cut -d '"' -f 4)
 
 
-echo delete first secret found
-aws --region "$REGION" secretsmanager  delete-secret  --secret-id $arn
+echo delete first secret found. 
+echo skipping as secret cannot be remade easily
+# aws --region "$REGION" secretsmanager  delete-secret  --secret-id $arn
 
 
 #aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
@@ -49,14 +52,6 @@ echo 'Create an access policy for the pod scoped down to just the secrets it sho
 
 
 
-POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-policy --policy-name nginx-deployment-policy --policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [ {
-        "Effect": "Allow",
-        "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
-        "Resource": ["arn:*:secretsmanager:*:*:secret:MySecret-??????"]
-    } ]
-}')
 
 
 # all ready done so can not do this
@@ -64,7 +59,22 @@ POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-
 #eksctl utils associate-iam-oidc-provider --region="$REGION" --cluster="$CLUSTERNAME" --approve # Only run this once
 
 
-eksctl delete iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" 
+eksctl delete iamserviceaccount --name nginx-deployment-policy --region="$REGION" --cluster "$CLUSTERNAME" 
+#nginx-deployment-sa
+
+
+
+arn2=$(aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`]'|grep Arn|cut -d '"' -f4)
+
+aws --region "$REGION" iam delete-policy --policy-arn $arn2
+
+
+
+
+#aws --region "$REGION" iam list-policies --query 'Policies[?PolicyName==`nginx-deployment-policy`
+
+
+
 
 
 #eksctl create iamserviceaccount --name nginx-deployment-sa --region="$REGION" --cluster "$CLUSTERNAME" --attach-policy-arn "$POLICY_ARN" --approve --override-existing-serviceaccount
