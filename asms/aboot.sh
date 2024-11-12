@@ -53,3 +53,6 @@ POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-
 }')
 
 
+# all ready done so can not do this
+
+#eksctl utils associate-iam-oidc-provider --region="$REGION" --cluster="$CLUSTERNAME" --approve # Only run this once
