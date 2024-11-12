@@ -12,7 +12,6 @@ helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-s
 
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
-export REGION=eu-north-1
 
 cd ../
 export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
