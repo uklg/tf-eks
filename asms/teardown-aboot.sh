@@ -9,13 +9,13 @@ export REGION=eu-north-1
 echo list all helm deployments in all namespaces
 
 helm list -A 
-
+helm repo list
 
 
 helm uninstall -n kube-system csi-secrets-store
 
 
-helm repo uninstall secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+helm repo remove secrets-store-csi-driver 
 
 exit
 
