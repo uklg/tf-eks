@@ -40,7 +40,7 @@ POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-
     "Statement": [ {
         "Effect": "Allow",
         "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
-        "Resource": ["arn:*:secretsmanager:*:*:secret:MySecret-??????"]
+        "Resource": ["arn:*:secretsmanager:*:*:secret:Blahsecret2-??????"]
     } ]
 }')
 
@@ -54,7 +54,7 @@ eksctl create iamserviceaccount --name nginx-deployment-sa --region="$REGION" --
 
 
 
-kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleSecretProviderClass.yaml
+kubectl apply -f modified-ExampleSecretProviderClass.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
 
