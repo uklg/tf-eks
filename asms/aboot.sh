@@ -36,3 +36,20 @@ aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-st
 
 
 # added eks policy SecretsManagerReadWrite temp
+
+
+echo 'Create an access policy for the pod scoped down to just the secrets it should have and save the policy ARN in a shell variable:'
+
+
+
+
+POLICY_ARN=$(aws --region "$REGION" --query Policy.Arn --output text iam create-policy --policy-name nginx-deployment-policy --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [ {
+        "Effect": "Allow",
+        "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
+        "Resource": ["arn:*:secretsmanager:*:*:secret:MySecret-??????"]
+    } ]
+}')
+
+
