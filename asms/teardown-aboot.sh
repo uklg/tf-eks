@@ -26,9 +26,14 @@ cd ../
 export CLUSTERNAME=$(terraform output cluster_name| tr -d '"')
 cd -
 
-exit
+arn=$(aws --region "$REGION" secretsmanager list-secrets|grep ARN|cut -d '"' -f 4)
 
-aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
+
+echo delete first secret found
+aws --region "$REGION" secretsmanager  delete-secret  --secret-id $arn
+
+
+#aws --region "$REGION" secretsmanager  create-secret --name MySecret --secret-string '{"username":"memeuser", "password":"hunter2"}'
 
 exit
 
