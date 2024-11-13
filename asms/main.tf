@@ -37,26 +37,6 @@ output "a" {
 
 
 
-data "aws_iam_policy_document" "myapp_secrets" {
-  statement {
-    actions = ["sts:AssumeRoleWithWebIdentity"]
-    effect  = "Allow"
-
-    condition {
-      test     = "StringEquals"
-      variable = "${replace(", "https://", "https://oidc.eks.eu-north-1.amazonaws.com/id/FBBA194D2167CE50FEF3777DB45E8A03")}:sub"
-      values   = ["system:serviceaccount:12-example:myapp"]
-    }
-
-    principals {
-      identifiers = [aws_iam_openid_connect_provider.eks.arn]
-      type        = "Federated"
-    }
-  }
-}
-
-/*
-
 resource "aws_iam_role" "myapp_secrets" {
   name               = "${aws_eks_cluster.eks.name}-myapp-secrets"
   assume_role_policy = data.aws_iam_policy_document.myapp_secrets.json
@@ -79,6 +59,8 @@ resource "aws_iam_policy" "myapp_secrets" {
     ]
   })
 }
+
+/*
 
 resource "aws_iam_role_policy_attachment" "myapp_secrets" {
   policy_arn = aws_iam_policy.myapp_secrets.arn
