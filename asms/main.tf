@@ -42,10 +42,19 @@ output "blah" {
 
 
 
+
+/*
+
+
 resource "aws_iam_role" "myapp_secrets" {
   name               = "${local.sgId.cluster_name}-myapp-secrets"
-  assume_role_policy = data.aws_iam_policy_document.myapp_secrets.json
+  assume_role_policy = aws_iam_policy_document.myapp_secrets.json
+  depends_on = [aws_iam_policy.myapp_secrets]
 }
+*/
+
+
+
 
 resource "aws_iam_policy" "myapp_secrets" {
   name = "${local.sgId.cluster_name}-myapp-secrets"
@@ -69,6 +78,7 @@ resource "aws_iam_policy" "myapp_secrets" {
 
 
 
+/*
 resource "aws_iam_role_policy_attachment" "myapp_secrets" {
   policy_arn = aws_iam_policy.myapp_secrets.arn
   role       = aws_iam_role.myapp_secrets.name
