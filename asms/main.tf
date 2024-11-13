@@ -35,10 +35,15 @@ output "a" {
 }
 
 
+output "blah" {
+  value = local.sgId.cluster_name
+}
+
+
 
 
 resource "aws_iam_role" "myapp_secrets" {
-  name               = "${aws_eks_cluster.eks.name}-myapp-secrets"
+  name               = "${locals.}-myapp-secrets"
   assume_role_policy = data.aws_iam_policy_document.myapp_secrets.json
 }
 

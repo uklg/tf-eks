@@ -128,3 +128,12 @@ The AWS Secrets Manager and Config Provider provides compatibility for legacy ap
 Click on a secret and python code is here to access this secret now the secret is not stored in plaintext anywhere
 
 
+
+
+
+
+
+```
+
+
+```
