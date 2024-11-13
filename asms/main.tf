@@ -29,6 +29,11 @@ resource "helm_release" "secrets_csi_driver_aws_provider" {
   depends_on = [helm_release.secrets_csi_driver]
 }
 
+
+output "a" {
+  value = local.sgId
+}
+
 /*
 
 data "aws_iam_policy_document" "myapp_secrets" {
