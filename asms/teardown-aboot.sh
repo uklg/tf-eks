@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo maybe readd teh policy to the role will help after delete
+
 
 export AWS_PROFILE=eks
 
@@ -134,4 +136,4 @@ echo should be no '{"username":"memeuser", "password":"hunter2"}'
 
 
 
-
+kubectl get pod 
