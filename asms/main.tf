@@ -1,3 +1,5 @@
+
+
 resource "helm_release" "secrets_csi_driver" {
   name = "secrets-store-csi-driver"
 
@@ -12,10 +14,10 @@ resource "helm_release" "secrets_csi_driver" {
     value = true
   }
 
-  depends_on = [helm_release.efs_csi_driver]
+  #depends_on = [helm_release.efs_csi_driver]
 }
 
-/*
+
 resource "helm_release" "secrets_csi_driver_aws_provider" {
   name = "secrets-store-csi-driver-provider-aws"
 
@@ -26,6 +28,8 @@ resource "helm_release" "secrets_csi_driver_aws_provider" {
 
   depends_on = [helm_release.secrets_csi_driver]
 }
+
+/*
 
 data "aws_iam_policy_document" "myapp_secrets" {
   statement {
@@ -76,3 +80,7 @@ resource "aws_iam_role_policy_attachment" "myapp_secrets" {
 output "myapp_secrets_role_arn" {
   value = aws_iam_role.myapp_secrets.arn
 }
+
+
+ */
+
