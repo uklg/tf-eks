@@ -93,3 +93,4 @@ after deploy secret change may need redeployment after secret change to pick it 
 keep old password and new password in database for a bit
 
 
+having two secrets makes the pod not too spin up need to fix
