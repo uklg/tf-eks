@@ -34,7 +34,8 @@ output "a" {
   value = local.sgId
 }
 
-/*
+
+
 
 data "aws_iam_policy_document" "myapp_secrets" {
   statement {
@@ -53,6 +54,8 @@ data "aws_iam_policy_document" "myapp_secrets" {
     }
   }
 }
+
+/*
 
 resource "aws_iam_role" "myapp_secrets" {
   name               = "${aws_eks_cluster.eks.name}-myapp-secrets"
@@ -88,4 +91,6 @@ output "myapp_secrets_role_arn" {
 
 
  */
+
+
 
