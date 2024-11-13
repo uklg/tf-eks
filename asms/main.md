@@ -94,3 +94,29 @@ keep old password and new password in database for a bit
 
 
 having two secrets makes the pod not too spin up need to fix
+now any secrets works ok
+
+---
+
+
+Additional Considerations from https://github.com/aws/secrets-store-csi-driver-provider-aws
+
+Rotation
+
+When using the optional alpha rotation reconciler feature of the Secrets Store CSI driver the driver will periodically remount the secrets in the SecretProviderClass. This will cause additional API calls which results in additional charges. Applications should use a reasonable poll interval that works with their rotation strategy. A one hour poll interval is recommended as a default to reduce excessive API costs.
+
+Anyone wishing to test out the rotation reconciler feature can enable it using helm:
+
+helm upgrade -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --set enableSecretRotation=true --set rotationPollInterval=3600s
+
+Automated Failover Regions
+
+In order to provide availability during connectivity outages or for disaster recovery configurations, this provider supports an automated failover feature to fetch secrets or parameters from a secondary region. To define an automated failover region, define the failoverRegion in the SecretProviderClass.yaml file:
+
+spec:
+  provider: aws
+  parameters:
+    region: us-east-1
+    failoverRegion: us-east-2
+
+
