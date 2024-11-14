@@ -113,9 +113,9 @@ resource "kubernetes_namespace" "my-namespace" {
 
 
 
-local.sgId.cluster_name
-local.sgId.cluster_identity_oidc_issuer
-
+#local.sgId.cluster_name
+#local.sgId.cluster_identity_oidc_issuer
+#local.sgId.cluster_identity_oidc_issuer_arn
 
 # Trusted entities
 data "aws_iam_policy_document" "secrets_csi_assume_role_policy" {
@@ -125,18 +125,18 @@ data "aws_iam_policy_document" "secrets_csi_assume_role_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:sub"
+      variable = "${replace(local.sgId.cluster_identity_oidc_issuer, "https://", "")}:sub"
       values   = ["system:serviceaccount:${kubernetes_namespace.my-namespace.metadata[0].name}:${aws_iam_policy.secrets_csi.name}"]
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:aud"
+      variable = "${replace(local.sgId.cluster_identity_oidc_issuer, "https://", "")}:aud"
       values   = ["sts.amazonaws.com"]
     }
 
     principals {
-      identifiers = [aws_iam_openid_connect_provider.eks.arn]
+      identifiers = [local.sgId.cluster_identity_oidc_issuer_arn]
       type        = "Federated"
     }
   }
