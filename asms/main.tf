@@ -59,7 +59,7 @@ resource "aws_iam_role" "myapp_secrets" {
 
 
 
-
+/*
 
 resource "aws_iam_policy" "myapp_secrets" {
   #name = "${local.sgId.cluster_name}-myapp-secrets"
@@ -85,7 +85,7 @@ resource "aws_iam_policy" "myapp_secrets" {
 
 
 }
-
+*/
 
 
 output "blah2" {
@@ -97,6 +97,88 @@ output "blah2" {
   #  value = "eksctl create iamserviceaccount --name nginx-deployment-sa --region "${local.sgId.region}" --cluster "${local.sgId.cluster_name}" --attach-policy-arn "${aws_iam_policy.myapp_secrets.arn}" --approve --override-existing-serviceaccounts"#
 
 }
+
+
+
+
+# Namespace
+resource "kubernetes_namespace" "my-namespace" {
+  metadata {
+    name = "my-namespace"
+  }
+}
+
+output.
+
+cluster_identity_oidc_issuer
+
+
+# Trusted entities
+data "aws_iam_policy_document" "secrets_csi_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:${kubernetes_namespace.my-namespace.metadata[0].name}:${aws_iam_policy.secrets_csi.name}"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+
+    principals {
+      identifiers = [aws_iam_openid_connect_provider.eks.arn]
+      type        = "Federated"
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+# Trusted entities
+data "aws_iam_policy_document" "secrets_csi_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:${kubernetes_namespace.my-namespace.metadata[0].name}:${aws_iam_policy.secrets_csi.name}"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.eks.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+
+    principals {
+      identifiers = [aws_iam_openid_connect_provider.eks.arn]
+      type        = "Federated"
+    }
+  }
+}
+
+
+
 
 
 
