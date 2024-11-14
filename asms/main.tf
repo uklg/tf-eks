@@ -178,6 +178,29 @@ data "aws_secretsmanager_secret" "secrets_csi" {
 
 
 
+# Policy Attachment
+resource "aws_iam_role_policy_attachment" "secrets_csi" {
+  policy_arn = aws_iam_policy.secrets_csi.arn
+  role       = aws_iam_role.secrets_csi.name
+}
+
+/*
+# Service Account
+resource "kubectl_manifest" "secrets_csi_sa" {
+  yaml_body = <<YAML
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-service-account
+  namespace: my-namespace
+  annotations:
+    eks.amazonaws.com/role-arn: ${aws_iam_role.secrets_csi.arn}
+YAML
+
+  depends_on = [kubernetes_namespace.my-namespace]
+}
+
+
 /*
 
 
