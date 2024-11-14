@@ -151,3 +151,27 @@ metadata:
 ```
 
 
+
+
+=== instances not spinning up
+
+ kubectl describe  deployment nginx-deployment
+
+shows
+FailedCreate
+
+
+kubectl describe rs
+
+
+Type     Reason        Age                   From                   Message
+  ----     ------        ----                  ----                   -------
+  Warning  FailedCreate  81s (x17 over 6m49s)  replicaset-controller  Error creating: pods "nginx-deployment-5867db46ff-" is forbidden: error looking up service account default/nginx-deployment-sa: serviceaccount "nginx-deployment-sa" not found
+
+
+
+or kubectl describe events 
+
+and look through events
+
+

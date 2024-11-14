@@ -1,3 +1,4 @@
+# work in progress do not use
 
 
 resource "helm_release" "secrets_csi_driver" {
@@ -61,7 +62,8 @@ resource "aws_iam_role" "myapp_secrets" {
 
 
 resource "aws_iam_policy" "myapp_secrets" {
-  name = "${local.sgId.cluster_name}-myapp-secrets"
+  #name = "${local.sgId.cluster_name}-myapp-secrets"
+  name = "nginx-deployment-policy"
 
 
 
@@ -74,7 +76,7 @@ resource "aws_iam_policy" "myapp_secrets" {
                        "secretsmanager:DescribeSecret",
                     ]
                    Effect   = "Allow"
-                   Resource = "*"
+                   Resource = ["arn:*:secretsmanager:*:*:secret:Blahsecret2-??????"]
                },
            ]
            Version   = "2012-10-17"
@@ -104,7 +106,7 @@ resource "null_resource" "create_iam_service_account" {
 
   triggers = {
     # always run this instead of just once
-    #always_run = timestamp()
+    always_run = timestamp()
 
   }
 
