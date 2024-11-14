@@ -130,6 +130,7 @@ Click on a secret and python code is here to access this secret now the secret i
 
 
 
+The create iamaccount effects the eks cluster
 List service account account
 
 
