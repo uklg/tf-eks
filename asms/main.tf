@@ -98,7 +98,7 @@ output "blah2" {
 
 
 
-resource "null_resource" "update_iam_policy" {
+resource "null_resource" "create_iam_service_account" {
 
   #
 
@@ -117,8 +117,28 @@ resource "null_resource" "update_iam_policy" {
     #command = module.eks.cluster_name
 
   }
+
+
+
+   provisioner "local-exec" {
+
+    #command = "eksctl create iamserviceaccount --name nginx-deployment-sa --region ${local.sgId.region} --cluster ${local.sgId.cluster_name} --attach-policy-arn ${aws_iam_policy.myapp_secrets.arn} --approve --override-existing-serviceaccounts"
+
+    when = destroy
+    command = "echo todo"
+
+  }
+
+
+
+
+
 #  depends_on = [module.null_resource.udpdate_ec2]
   depends_on = [aws_iam_policy.myapp_secrets]
+
+
+
+
 
 
 }
