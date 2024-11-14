@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-app
+  name: my-app
+  namespace: my-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      serviceAccountName: my-service-account # should be in the same namespace as the deployment
+      volumes:
+        - name: spc-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: my-app-spc # SecretProviderClass name
+      containers:
+        - image: $IMAGE
+          name: my-app
+          volumeMounts:
+            - name: spc-volume
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: DOCUMENTDB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: blahsecret2
+                key: DOCUMENTDB_HOST
+          - name: DOCUMENTDB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: blahsecret2
+                key: DOCUMENTDB_PASSWORD
+          - name: AURORA_MYSQL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: blahsecret2
+                key: AURORA_MYSQL_USERNAME
+          - name: AURORA_MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: blahsecret2
+                key: AURORA_MYSQL_PASSWORD
