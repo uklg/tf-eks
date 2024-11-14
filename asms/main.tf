@@ -144,9 +144,36 @@ data "aws_iam_policy_document" "secrets_csi_assume_role_policy" {
 
 
 
+# Role
+resource "aws_iam_role" "secrets_csi" {
+  assume_role_policy = data.aws_iam_policy_document.secrets_csi_assume_role_policy.json
+  name               = "secrets-csi-role"
+}
 
 
 
+# Policy
+resource "aws_iam_policy" "secrets_csi" {
+  name = "secrets-csi-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+      ]
+      Resource = ["${data.aws_secretsmanager_secret.secrets_csi.arn}"]
+    }]
+  })
+}
+
+
+data "aws_secretsmanager_secret" "secrets_csi" {
+  name = "Blahsecret2"
+}
 
 
 
