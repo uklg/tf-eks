@@ -29,6 +29,8 @@ resource "helm_release" "secrets_csi_driver_aws_provider" {
   depends_on = [helm_release.secrets_csi_driver]
 }
 
+#output
+
 
 output "a" {
   value = local.sgId
@@ -43,15 +45,17 @@ output "blah" {
 
 
 
+
+
 /*
-
-
 resource "aws_iam_role" "myapp_secrets" {
   name               = "${local.sgId.cluster_name}-myapp-secrets"
-  assume_role_policy = aws_iam_policy_document.myapp_secrets.json
-  depends_on = [aws_iam_policy.myapp_secrets]
+  #assume_role_policy = aws_iam_policy_document.myapp_secrets.policy
+  assume_role_policy = aws_iam_policy.myapp_secrets.policy
+  #depends_on = [aws_iam_policy.myapp_secrets]
 }
 */
+
 
 
 
@@ -82,6 +86,46 @@ resource "aws_iam_policy" "myapp_secrets" {
 
 
 
+output "blah2" {
+
+
+  #value = "a"
+  value = "eksctl create iamserviceaccount --name nginx-deployment-sa --region ${local.sgId.region}"
+
+  #  value = "eksctl create iamserviceaccount --name nginx-deployment-sa --region "${local.sgId.region}" --cluster "${local.sgId.cluster_name}" --attach-policy-arn "${aws_iam_policy.myapp_secrets.arn}" --approve --override-existing-serviceaccounts"#
+
+}
+
+
+
+resource "null_resource" "update_iam_policy" {
+
+  #
+
+  triggers = {
+    # always run this instead of just once
+    #always_run = timestamp()
+
+  }
+
+  provisioner "local-exec" {
+
+    #command = "aws eks --region ${var.region} update-kubeconfig --name ${module.eks.cluster_name}"
+    command = "eksctl create iamserviceaccount --name nginx-deployment-sa --region ${local.sgId.region} --cluster ${local.sgId.cluster_name} --attach-policy-arn ${aws_iam_policy.myapp_secrets.arn} --approve --override-existing-serviceaccounts"
+
+
+    #command = module.eks.cluster_name
+
+  }
+#  depends_on = [module.null_resource.udpdate_ec2]
+  depends_on = [aws_iam_policy.myapp_secrets]
+
+
+}
+
+
+
+
 
 
 
@@ -102,3 +146,6 @@ output "myapp_secrets_role_arn" {
 
 
 
+output "policy_arn" {
+  value = aws_iam_policy.myapp_secrets.arn
+}
