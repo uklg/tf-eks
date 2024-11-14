@@ -124,10 +124,11 @@ resource "null_resource" "create_iam_service_account" {
 
     #command = "eksctl create iamserviceaccount --name nginx-deployment-sa --region ${local.sgId.region} --cluster ${local.sgId.cluster_name} --attach-policy-arn ${aws_iam_policy.myapp_secrets.arn} --approve --override-existing-serviceaccounts"
 
-    when = destroy
-    command = "echo todo"
+#   when = destroy
+    command = "eksctl delete iamserviceaccount --name nginx-deployment-sa --region ${local.sgId.region} --cluster ${local.sgId.cluster_name}"
 
-  }
+
+ }
 
 
 
