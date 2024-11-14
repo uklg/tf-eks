@@ -44,7 +44,7 @@ output "blah" {
 
 
 
-
+#local.sgId.cluster_identity_oidc_issuer
 
 
 
@@ -108,9 +108,13 @@ resource "kubernetes_namespace" "my-namespace" {
   }
 }
 
-output.
 
-cluster_identity_oidc_issuer
+
+
+
+
+local.sgId.cluster_name
+local.sgId.cluster_identity_oidc_issuer
 
 
 # Trusted entities
