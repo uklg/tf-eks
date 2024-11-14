@@ -59,22 +59,29 @@ resource "aws_iam_role" "myapp_secrets" {
 resource "aws_iam_policy" "myapp_secrets" {
   name = "${local.sgId.cluster_name}-myapp-secrets"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "secretsmanager:GetSecretValue",
-          "secretsmanager:DescribeSecret"
-        ]
-        # todo tighten
-        Resource = "*" # "arn:*:secretsmanager:*:*:secret:my-secret-kkargS"
-      }
-    ]
-  })
+
+
+   policy           = jsonencode(
+       {
+           Statement = [
+               {
+                   Action   = [
+                       "secretsmanager:GetSecretValue",
+                       "secretsmanager:DescribeSecret",
+                    ]
+                   Effect   = "Allow"
+                   Resource = "*"
+               },
+           ]
+           Version   = "2012-10-17"
+       }
+   )
+
 
 }
+
+
+
 
 
 
