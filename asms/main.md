@@ -175,3 +175,7 @@ or kubectl describe events
 and look through events
 
 
+any errors install both cs and deployment again as they are not picked up automatically
+
+
+
