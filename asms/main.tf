@@ -1,4 +1,6 @@
 # work in progress do not use
+# https://medium.com/@h.alp.bayramoglu/using-eks-secrets-store-csi-provider-ff5e73748b5c
+
 
 
 resource "helm_release" "secrets_csi_driver" {
