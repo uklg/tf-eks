@@ -130,10 +130,23 @@ Click on a secret and python code is here to access this secret now the secret i
 
 
 
-
-
-
-```
+List service account account
 
 
 ```
+$ kubectl get serviceaccount nginx-deployment-sa -o yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::905418418476:role/eksctl-education-eks-3EYgYeqg-addon-iamservic-Role1-EjBw1juX5oAr
+  creationTimestamp: "2024-11-14T10:40:32Z"
+  labels:
+    app.kubernetes.io/managed-by: eksctl
+  name: nginx-deployment-sa
+  namespace: default
+  resourceVersion: "10199"
+  uid: d41a50a0-b23c-44b6-b61c-bd5cc35a74ba
+```
+
+
