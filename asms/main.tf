@@ -184,7 +184,7 @@ resource "aws_iam_role_policy_attachment" "secrets_csi" {
   role       = aws_iam_role.secrets_csi.name
 }
 
-/*
+
 # Service Account
 resource "kubectl_manifest" "secrets_csi_sa" {
   yaml_body = <<YAML
