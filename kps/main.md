@@ -14,3 +14,7 @@ This will create a stack and sample monitoring refer to minikube/kube-promethiuu
 
 
 https://medium.com/@priyankar9805/deploy-kube-prometheus-stack-on-eks-cluster-f1352101bf69
+
+hopefully custom yaml can setup notifications
+
+
