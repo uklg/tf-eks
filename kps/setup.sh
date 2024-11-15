@@ -15,7 +15,7 @@ kubectl create ns monitoring
 echo Install the stack with the custom values.yaml file
 
 
-wget https://raw.githubusercontent.com/prprasad2020/don-cortex-demo/refs/heads/main/Kube-Prometheus-Stack/kube-prometheus-stack-values.yaml
+wget -O  custom.yaml https://raw.githubusercontent.com/prprasad2020/don-cortex-demo/refs/heads/main/Kube-Prometheus-Stack/kube-prometheus-stack-values.yaml
 
 exit
 
