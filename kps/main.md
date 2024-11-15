@@ -1,5 +1,6 @@
 adding kps a monitoring stack to eks cluster
 
+(in future add in managed service and then it can complain about a missing cluster) but do could aws monitoring basic do that)
 
 
 
