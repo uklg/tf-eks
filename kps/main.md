@@ -18,3 +18,32 @@ https://medium.com/@priyankar9805/deploy-kube-prometheus-stack-on-eks-cluster-f1
 hopefully custom yaml can setup notifications
 
 
+
+
+
+
+run ./setup.sh
+
+it works so far apart from grafana  stack pods
+
+had to clean up test helm
+
+
+
+
+kubectl get pod -A
+
+
+
+
+kubectl describe -n monitoring pod/kube-prometheus-stack-grafana-0
+
+
+lots of stuff to look at here very useful
+
+
+
+
+trying to spin up a pv investigate
+
+
