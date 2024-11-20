@@ -73,3 +73,9 @@ kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o json
 
 
 need to convert this from base64
+
+kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o jsonpath='{.data.admin-password}'|base64 -d
+
+
+
+
