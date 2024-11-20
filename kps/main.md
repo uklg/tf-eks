@@ -47,3 +47,7 @@ lots of stuff to look at here very useful
 trying to spin up a pv investigate
 
 
+---
+
+
+Since the alertmanager configuration can have SMTP server credentials or any other tokens as plain text in the configuration, AlertmanagerConfig CRD can be used to create those configuration separately and it can be adding to alertmanager when deploying the kube-prometheus-stack.
