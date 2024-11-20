@@ -37,3 +37,23 @@ kubectl --namespace monitoring get pods -l "release=kube-prometheus-stack"
 kubectl get pod -A
 
 
+
+
+
+exit 0
+
+
+echo here the secret is created
+
+kubectl describe secret kube-prometheus-stack-grafana -n monitoring
+
+Type:  Opaque
+
+Data
+====
+admin-password:  13 bytes
+admin-user:      5 bytes
+ldap-toml:       0 bytes
+
+
+
