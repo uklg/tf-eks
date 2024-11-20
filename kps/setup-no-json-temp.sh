@@ -87,3 +87,13 @@ kubectl describe pod kube-prometheus-stack-grafana-84c768fd8f-dfxz9 -n monitorin
 
 
 
+
+kubectl -n monitoring port-forward pod/kube-prometheus-stack-grafana-84c768fd8f-dfxz9 3000:3000
+
+
+browser
+
+localhost:3000
+
+
+
