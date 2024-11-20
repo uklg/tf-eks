@@ -70,3 +70,11 @@ kubectl describe -n monitoring pod kube-prometheus-stack-grafana-0
 
   Warning  FailedMount             29s (x18 over 20m)  kubelet                  MountVolume.SetUp failed for volume "grafana-secret" : secret "grafana-secret" not found
 
+
+the setup script fails as it does not have a volume secret yet need to set this up from its dir (secrets manager) can spinup via setup-no-json-temp.sh
+
+script here is  a useful guide to this after end of script
+
+it will spin up a useful test now need to integrate the custom json starting with the secret volume also the email is here too
+
+email could be a dkim etc hostname mail server
