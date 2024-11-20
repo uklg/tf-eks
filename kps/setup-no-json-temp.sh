@@ -61,3 +61,15 @@ need to get this password
 
 
 and proxy it
+
+---
+
+kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o json
+
+    "data": {
+        "admin-password": "cHJvbS1vcGVyYXRvcg==",
+        "admin-user": "YWRtaW4=",
+        "ldap-toml": ""
+
+
+need to convert this from base64
