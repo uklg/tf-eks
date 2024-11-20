@@ -29,3 +29,6 @@ kubectl --namespace monitoring get pods -l "release=kube-prometheus-stack"
 
 
 
+git pod -A
+
+
