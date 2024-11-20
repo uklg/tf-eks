@@ -80,3 +80,10 @@ kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o jsonpath='{.d
 
 kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o jsonpath='{.data.admin-user}'|base64 -d
 
+
+---
+kubectl describe pod kube-prometheus-stack-grafana-84c768fd8f-dfxz9 -n monitoring |grep Ports
+    Ports:           3000/TCP, 9094/TCP, 9094/UDP
+
+
+
