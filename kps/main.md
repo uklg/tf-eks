@@ -62,3 +62,11 @@ custom.yaml:      password: $__file{/etc/secrets/grafana/smtp_password}
 
 
 
+
+kubectl describe -n monitoring pod kube-prometheus-stack-grafana-0
+
+
+
+
+  Warning  FailedMount             29s (x18 over 20m)  kubelet                  MountVolume.SetUp failed for volume "grafana-secret" : secret "grafana-secret" not found
+
