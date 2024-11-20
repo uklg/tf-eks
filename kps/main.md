@@ -51,3 +51,12 @@ trying to spin up a pv investigate
 
 
 Since the alertmanager configuration can have SMTP server credentials or any other tokens as plain text in the configuration, AlertmanagerConfig CRD can be used to create those configuration separately and it can be adding to alertmanager when deploying the kube-prometheus-stack.
+
+
+grep file
+
+here a file contents is converted into a value this is cool:
+
+custom.yaml:      user: $__file{/etc/secrets/grafana/smtp_user}
+custom.yaml:      password: $__file{/etc/secrets/grafana/smtp_password}
+
