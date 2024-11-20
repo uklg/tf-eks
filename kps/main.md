@@ -60,3 +60,5 @@ here a file contents is converted into a value this is cool:
 custom.yaml:      user: $__file{/etc/secrets/grafana/smtp_user}
 custom.yaml:      password: $__file{/etc/secrets/grafana/smtp_password}
 
+
+
