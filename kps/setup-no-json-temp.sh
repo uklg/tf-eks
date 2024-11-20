@@ -78,4 +78,5 @@ kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o jsonpath='{.d
 
 
 
+kubectl get secrets kube-prometheus-stack-grafana -n monitoring -o jsonpath='{.data.admin-user}'|base64 -d
 
