@@ -22,6 +22,7 @@ wget -O  custom.yaml https://raw.githubusercontent.com/prprasad2020/don-cortex-d
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -f custom-moved.json -n monitoring
 
 
+
 echo dispay the pod status 
 
 kubectl --namespace monitoring get pods -l "release=kube-prometheus-stack"
