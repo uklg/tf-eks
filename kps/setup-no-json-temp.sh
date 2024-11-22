@@ -37,6 +37,13 @@ kubectl --namespace monitoring get pods -l "release=kube-prometheus-stack"
 kubectl get pod -A
 
 
+echo wait for pod
+sleep 1
+
+
+
+
+kubectl -n monitoring port-forward pod/$(kubectl get pod -n monitoring|grep grafana|cut -d ' ' -f 1) 3000:3000 &
 
 
 
