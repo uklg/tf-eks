@@ -47,6 +47,9 @@ kubectl -n monitoring port-forward pod/$(kubectl get pod -n monitoring|grep graf
 
 
 
+
+echo port forward set up point browser to http://localhost:3000 for grafana
+
 exit 0
 
 
