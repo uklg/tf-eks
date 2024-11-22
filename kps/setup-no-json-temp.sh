@@ -22,7 +22,8 @@ wget -O  custom.yaml https://raw.githubusercontent.com/prprasad2020/don-cortex-d
 #helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -f custom-moved.json -n monitoring
 
 
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring
+echo fix the failed metrics eks does not need so can ignore
+helm install -f values.yaml kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring
 
 
 
