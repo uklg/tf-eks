@@ -77,4 +77,53 @@ script here is  a useful guide to this after end of script
 
 it will spin up a useful test now need to integrate the custom json starting with the secret volume also the email is here too
 
+
+
+---
+
+
+
+
+following
+https://medium.com/@joudwawad/comprehensive-beginners-guide-to-kube-prometheus-in-kubernetes-monitoring-alerts-integration-4ade4fa8fa8c
 email could be a dkim etc hostname mail server
+
+
+This looks very useful
+
+
+
+
+
+Users on EKS, GKE, or similar services might encounter additional alerts KubeSchedulerDown and KubeControllerManagerDown. These are common because the control plane nodes in managed services aren’t visible to Prometheus. To address this:
+1. Create a values.yaml file with the following content:
+
+kubeScheduler:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+
+2. Update your installation using:
+
+helm upgrade -f values.yaml kube-prometheus prometheus-community/kube-prometheus-stack -n monitoring
+
+Or incorporate these settings during initial installation:
+
+helm install -f values.yaml kube-prometheus prometheus-community/kube-prometheus-stack -n monitoring
+
+After applying these changes and waiting a few minutes, the additional alerts should resolve. 😸
+
+
+
+need to apply the rest of this too custom metrics and service metrics 
+
+---
+
+
+
+
+
+
+
+
+
