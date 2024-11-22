@@ -117,9 +117,14 @@ After applying these changes and waiting a few minutes, the additional alerts sh
 
 need to apply the rest of this too custom metrics and service metrics 
 
+
 ---
 
+add in slack secret using file system ref and a secret
 
+
+
+todo add in secret via volume and integrate custom-moved.json.moved as this has lots of helpful content
 
 
 
