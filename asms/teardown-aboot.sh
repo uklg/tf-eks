@@ -19,6 +19,15 @@ helm list -A
 helm repo list
 
 
+
+kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleSecretProviderClass.yaml
+
+kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
+
+
+
+
+
 helm uninstall -n kube-system csi-secrets-store
 
 
@@ -120,9 +129,6 @@ aws --region "$REGION" iam delete-policy --policy-arn $arn2
 
 
 
-kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleSecretProviderClass.yaml
-
-kubectl delete -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/examples/ExampleDeployment.yaml
 
 
 
