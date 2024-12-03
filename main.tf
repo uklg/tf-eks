@@ -60,7 +60,11 @@ module "eks" {
   cluster_addons = {
     aws-ebs-csi-driver = {
       service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
-    }
+    },
+  #  aws-ebs-csi-driver2 = {
+  #    service_account_role_arn = module.irsa-myapp_secrets.iam_role_arn
+  #  }
+    
   }
 
   vpc_id     = module.vpc.vpc_id
@@ -163,6 +167,65 @@ module "irsa-ebs-csi" {
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
 }
+
+
+
+###
+
+resource "aws_iam_policy" "myapp_secrets" {
+  #name = "${local.sgId.cluster_name}-myapp-secrets" #todo
+  name = "nginx-deployment-policy"
+
+
+
+   policy           = jsonencode(
+       {
+           Statement = [
+               {
+                   Action   = [
+                       "secretsmanager:GetSecretValue",
+                       "secretsmanager:DescribeSecret",
+                    ]
+                   Effect   = "Allow"
+                   Resource = ["arn:*:secretsmanager:*:*:secret:Blahsecret2-??????"]
+               },
+           ]
+           Version   = "2012-10-17"
+       }
+   )
+
+
+}
+
+
+
+
+#data "aws_iam_policy" "ebs_policy" {
+#  arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+#}
+
+
+
+
+module "irsa-myapp_secrets" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  version = "5.39.0"
+
+  create_role                   = true
+  # needs to not have underscore
+  role_name                     = "myapp-secrets"
+  #role_name                     = "AmazonEKSRolemyapp_secrets-${module.eks.cluster_name}"
+  provider_url                  = module.eks.oidc_provider
+  role_policy_arns              = [aws_iam_policy.myapp_secrets.arn]
+  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
+  # todo fix this ref if it works
+  # provider_url = "oidc.eks.eu-west-1.amazonaws.com/id/BA9E170D464AF7B92084EF72A69B9DC8"
+}
+
+
+
+###
+
 
 resource "null_resource" "udpdate_ec2" {
 
