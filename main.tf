@@ -174,7 +174,7 @@ module "irsa-ebs-csi" {
 
 resource "aws_iam_policy" "myapp_secrets" {
   #name = "${local.sgId.cluster_name}-myapp-secrets" #todo
-  name = "nginx-deployment-policy"
+  name = "nginx-deployment-policy-t"
 
 
 
@@ -212,8 +212,7 @@ module "irsa-myapp_secrets" {
   version = "5.39.0"
 
   create_role                   = true
-  # needs to not have underscore
-  role_name                     = "myapp-secrets"
+  role_name                     = "myapp-secrets-t"
   #role_name                     = "AmazonEKSRolemyapp_secrets-${module.eks.cluster_name}"
   provider_url                  = module.eks.oidc_provider
   role_policy_arns              = [aws_iam_policy.myapp_secrets.arn]
