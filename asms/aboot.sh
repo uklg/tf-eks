@@ -65,6 +65,12 @@ echo shouul be in pod user /mnt/secretes-store
 echo any errors try deleting the ngix policy first
 
 
+
+echo wait for the deployment to come up before polling 1min or so
+
+kubectl wait --for=jsonpath='{status.availableReplicas}' deployments/nginx-deployment --timeout=360s
+
+
 echo here is the secret:
 
 
