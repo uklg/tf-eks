@@ -251,6 +251,15 @@ module "iam_eks_role" {
 
 
 
+resource "kubernetes_service_account" "example" {
+  metadata {
+    name      = "my-service-account"
+    namespace = "default"
+    annotations = {
+      "eks.amazonaws.com/role-arn" = module.iam_eks_role.iam_role_arn 
+    }
+  }
+}
 
 
 
