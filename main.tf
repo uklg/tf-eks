@@ -223,7 +223,7 @@ module "irsa-myapp_secrets" {
   # provider_url = "oidc.eks.eu-west-1.amazonaws.com/id/BA9E170D464AF7B92084EF72A69B9DC8"
 }
 
-
+#/*
 
 module "iam_eks_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
@@ -237,7 +237,7 @@ module "iam_eks_role" {
   oidc_providers = {
     one = {
      # provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
-      provider_arn = module.eks.cluster_oidc_issuer_url
+      provider_arn = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
     }
     #two = {
@@ -247,6 +247,7 @@ module "iam_eks_role" {
   }
 }
 
+#*/
 
 
 
