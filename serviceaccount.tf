@@ -55,3 +55,13 @@ resource "aws_iam_role_policy" "default" {
     }]
   })
 }
+
+resource "kubernetes_service_account" "example" {
+  metadata {
+    name      = "my-service-account"
+    namespace = "default"
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.default.arn
+    }
+  }
+}
