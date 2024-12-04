@@ -216,10 +216,41 @@ module "irsa-myapp_secrets" {
   #role_name                     = "AmazonEKSRolemyapp_secrets-${module.eks.cluster_name}"
   provider_url                  = module.eks.oidc_provider
   role_policy_arns              = [aws_iam_policy.myapp_secrets.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
+  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa2"]
+  # oidc_fully_qualified_subjects = ["system:serviceaccount:default:nginx-deployment-sa"]
+
   # todo fix this ref if it works
   # provider_url = "oidc.eks.eu-west-1.amazonaws.com/id/BA9E170D464AF7B92084EF72A69B9DC8"
 }
+
+
+
+module "iam_eks_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  role_name = "myapp-secrets-t2"
+
+  role_policy_arns = {
+    # policy = "arn:aws:iam::012345678901:policy/myapp"
+    policy = aws_iam_policy.myapp_secrets.arn
+  }
+
+  oidc_providers = {
+    one = {
+     # provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+      provider_arn = module.eks.cluster_oidc_issuer_url
+      namespace_service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
+    }
+    #two = {
+    #  provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
+    #  namespace_service_accounts = ["default:my-app-staging"]
+    #}
+  }
+}
+
+
+
+
+
 
 
 
