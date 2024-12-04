@@ -56,6 +56,11 @@ resource "aws_iam_role_policy" "default" {
   })
 }
 
+
+
+
+
+
 resource "kubernetes_service_account" "example" {
   metadata {
     name      = "my-service-account"
@@ -65,3 +70,35 @@ resource "kubernetes_service_account" "example" {
     }
   }
 }
+
+
+
+
+/*
+
+resource "kubernetes_service_account" "example" {
+  metadata {
+    name = "terraform-example"
+  }
+}
+
+
+
+
+
+resource "kubernetes_namespace" "example" {
+  metadata {
+    annotations = {
+      name = "example-annotation"
+    }
+
+    labels = {
+      mylabel = "label-value"
+    }
+
+    name = "terraform-example-namespace"
+  }
+}
+
+
+*/
