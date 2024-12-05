@@ -1,4 +1,26 @@
-setup ebs csi persisent volume storage
+
+disble it
+```
+/*
+  cluster_addons = {
+    aws-ebs-csi-driver = {
+      service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
+    }
+  #  aws-ebs-csi-driver2 = {
+  #    service_account_role_arn = module.irsa-myapp_secrets.iam_role_arn
+ }
+*/
+```
+
+turn it off here
+
+or
+
+kubectl delete deployments.apps -n kube-system ebs-csi-controller
+
+this will delete it
+
+=== setup ebs csi persisent volume storage
 
 
 
