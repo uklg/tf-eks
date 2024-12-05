@@ -24,3 +24,6 @@ echo An error occurred (AccessDenied) when calling the AssumeRoleWithWebIdentity
 
 
 echo need to add this in to iam rules
+
+echo kubectl exec -it pod/app-name-7c6c5f46d6-bz257 -- /bin/bash
+
