@@ -47,6 +47,7 @@ resource "aws_iam_role" "default" {
   })
 }
 
+
 resource "aws_iam_role_policy" "default" {
   name   = "eks-irsa-policy"
   role   = aws_iam_role.default.id
@@ -56,13 +57,13 @@ resource "aws_iam_role_policy" "default" {
       Effect = "Allow",
       Action = [
         "s3:ListBucket",
-        "s3:GetObject"
+        "s3:GetObject",
+        "s3:ListAllMyBuckets"
       ],
       Resource = "*"
     }]
   })
 }
-
 
 
 
