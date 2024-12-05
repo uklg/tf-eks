@@ -171,7 +171,7 @@ module "irsa-ebs-csi" {
 
 
 ###
-
+/*
 resource "aws_iam_policy" "myapp_secrets" {
   #name = "${local.sgId.cluster_name}-myapp-secrets" #todo
   name = "nginx-deployment-policy-t"
@@ -223,7 +223,11 @@ module "irsa-myapp_secrets" {
   # provider_url = "oidc.eks.eu-west-1.amazonaws.com/id/BA9E170D464AF7B92084EF72A69B9DC8"
 }
 
-#/*
+*/
+
+/*
+
+
 
 module "iam_eks_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
@@ -247,7 +251,7 @@ module "iam_eks_role" {
   }
 }
 
-#*/
+
 
 
 
@@ -261,6 +265,7 @@ resource "kubernetes_service_account" "example" {
   }
 }
 
+*/
 
 
 
