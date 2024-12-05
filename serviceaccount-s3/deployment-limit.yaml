@@ -17,5 +17,11 @@ spec:
       containers:
       - name: my-container
         image: amazonlinux
-        #command: ["/bin/bash", "sleep", "infinity"]
-        command: ["/bin/bash", "-c", "aws s3 ls"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
+       # command: ["/bin/bash", "sleep", "infinity"]
+
+       # command: ["/bin/bash", "-c", "aws s3 ls"]
