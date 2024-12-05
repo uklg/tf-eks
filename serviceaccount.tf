@@ -14,6 +14,13 @@ data "tls_certificate" "default" {
 #}
 
 
+locals {
+  url = data.aws_eks_cluster.default.identity[0].oidc[0].issuer
+  policy = replace (module.eks.cluster_oidc_issuer_url, "https://", "")
+}
+
+
+
 
 resource "aws_iam_role" "default" {
   name = "eks-irsa-role"
@@ -31,9 +38,9 @@ resource "aws_iam_role" "default" {
       Condition = {
         StringEquals = {
           # "${aws_iam_openid_connect_provider.default.url}:sub" = "system:serviceaccount:default:my-service-account"
-            "${module.eks.cluster_oidc_issuer_url}:sub" = "system:serviceaccount:default:my-service-account"
+            "${local.policy}:sub" = "system:serviceaccount:default:my-service-account"
           # "${aws_iam_openid_connect_provider.default.url}:aud" = "sts.amazonaws.com"  
-            "${module.eks.cluster_oidc_issuer_url}:aud" = "sts.amazonaws.com"
+            "${local.policy}:aud" = "sts.amazonaws.com"
           }
       }
     }]
