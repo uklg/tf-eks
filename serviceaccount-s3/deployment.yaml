@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-name
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-name
+  template:
+    metadata:
+      labels:
+        app: app-name
+    spec:
+      serviceAccountName: my-service-account
+      containers:
+      - name: my-container
+        image: amazonlinux
+        command: ["/bin/bash", "-c", "aws s3 ls"]
