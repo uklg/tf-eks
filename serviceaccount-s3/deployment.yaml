@@ -18,4 +18,8 @@ spec:
       - name: my-container
         image: amazonlinux
         #command: ["/bin/bash", "sleep", "infinity"]
-        command: ["/bin/bash", "-c", "aws s3 ls"]
+       # command: ["/bin/bash", "-c", "aws s3 ls"]
+
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+
