@@ -17,5 +17,10 @@ kubectl get pod
 echo login in to pod
 
 echo yum install awscli
+aws ls
 
 
+echo An error occurred (AccessDenied) when calling the AssumeRoleWithWebIdentity operation: Not authorized to perform sts:AssumeRoleWithWebIdentity
+
+
+echo need to add this in to iam rules
