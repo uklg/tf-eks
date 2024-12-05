@@ -11,3 +11,11 @@ kubectl apply -f deployment.yaml
 
 sleep 2
 kubectl get pod
+
+
+
+echo login in to pod
+
+echo yum install awscli
+
+
