@@ -47,6 +47,13 @@ echo pod_name=$(kubectl get pod|grep app-name-infinite|cut -d ' ' -f 1)
 pod_name=$(kubectl get pod|grep app-name-infinite|cut -d ' ' -f 1)
 
 
-echo use this to connect to infinity pod
-echo  kubectl exec -it pod/$pod_name -- /bin/bash
+echo use this to connect to infinity pod to test by self:
+echo  kubectl exec -it pod/$pod_name -- /bin/bash aws ls
+
+
+
+echo do an aws s3 ls should show no errors if good
+kubectl exec -it pod/app-name-infinite-58fddc4dfc-s527j -- /bin/bash -c 'aws s3 ls'
+
+
 
