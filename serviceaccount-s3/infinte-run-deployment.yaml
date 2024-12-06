@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-name-infinite
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-name-infinite
+  template:
+    metadata:
+      labels:
+        app: app-name-infinite
+    spec:
+      serviceAccountName: my-service-account
+      containers:
+      - name: my-container
+        image: amazonlinux
+        #command: ["/bin/bash", "sleep", "infinity"]
+       # command: ["/bin/bash", "-c", "aws s3 ls"]
+
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "yum install -y awscli ;while true; do sleep 30; done;" ]
+
