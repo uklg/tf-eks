@@ -35,25 +35,28 @@ kubectl delete -f infinte-run-deployment.yaml
 
 kubectl apply -f infinte-run-deployment.yaml
 
-pod_name=$(kubectl get pod|grep app-name-infinite|cut -d ' ' -f 1)
+pod_name=$(kubectl get pod|grep app-name-infinite|grep Running|cut -d ' ' -f 1)
 
 
 echo kubectl wait --for=jsonpath='{status.availableReplicas}' deployments/app-name-infinite --timeout=10s
-
+sleep 1
 
 echo pod_name=$(kubectl get pod|grep app-name-infinite|cut -d ' ' -f 1)
 
 
-pod_name=$(kubectl get pod|grep app-name-infinite|cut -d ' ' -f 1)
 
 
 echo use this to connect to infinity pod to test by self:
-echo  kubectl exec -it pod/$pod_name -- /bin/bash aws ls
+echo  kubectl exec -it pod/$pod_name -- /bin/bash
+
+
+
 
 
 
 echo do an aws s3 ls should show no errors if good
-kubectl exec -it pod/app-name-infinite-58fddc4dfc-s527j -- /bin/bash -c 'aws s3 ls'
+kubectl get pod
+kubectl exec -it pod/${pod_name} -- /bin/bash -c 'aws s3 ls'
 
 
 
